@@ -23,7 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/alekc/zoneminder.machine.learning
+          images: ghcr.io/${{ github.repository_owner }}/zoneminder.machine.learning
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
@@ -38,6 +38,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

@@ -82,9 +82,10 @@ RUN	cd /root && \
 	sed -i "s|^;date.timezone =.*|date.timezone = ${TZ}|" /etc/php/$PHP_VERS/apache2/php.ini && \
 	service mariadb start && \
 	mysql -uroot -e "grant all on zm.* to 'zmuser'@localhost identified by 'zmpass';" && \
-	mysqladmin -uroot reload && \
-	mysql -sfu root < "mysql_secure_installation.sql" && \
-	rm mysql_secure_installation.sql && \
+#	mysqladmin -uroot reload && \
+#	mysql -sfu root < "mysql_secure_installation.sql" && \
+#	rm mysql_secure_installation.sql && \
+	mysql -sfu root < "/usr/share/zoneminder/db/zm_create.sql" && \
 	mysql -sfu root < "mysql_defaults.sql" && \
 	rm mysql_defaults.sql
 

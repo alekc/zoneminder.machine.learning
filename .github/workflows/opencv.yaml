@@ -1,15 +1,20 @@
-name: docker-image
+name: opencv-cuda
 
 on:
   workflow_dispatch:
+  # release
   push:
     branches:
       - 'master'
     tags:
       - 'v*'
+    paths:
+      - opencv
   pull_request:
     branches:
       - 'master'
+    paths:
+      - "opencv/**"
 
 jobs:
   docker:
@@ -23,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ github.repository_owner }}/zoneminder.machine.learning
+          images: ghcr.io/${{ github.repository_owner }}/zoneminder.machine.learning/opencv-base
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
@@ -36,7 +41,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: opencv
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

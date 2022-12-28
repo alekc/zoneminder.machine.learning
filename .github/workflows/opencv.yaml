@@ -7,11 +7,13 @@ on:
       - 'master'
     tags:
       - 'v*'
+    paths:
+      - opencv
   pull_request:
     branches:
       - 'master'
-  paths:
-    - opencv
+    paths:
+      - opencv  
 
 jobs:
   docker:

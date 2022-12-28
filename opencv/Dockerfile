@@ -3,7 +3,7 @@ FROM 11.7.1-devel-ubuntu22.04
 ARG DEBIAN_FRONTEND=noninteractive
 ARG OPENCV_VERSION=4.5.3
 
-#
+
 RUN apt-get update && apt-get upgrade -y &&\
     # Install build tools, build dependencies and python
     apt-get install -y \
